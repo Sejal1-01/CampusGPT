@@ -1,0 +1,1 @@
+Write {n} study flashcards on the topic for an engineering student. front: a term or short question (max 12 words). back: a precise answer (1-3 sentences). Cover the most exam-relevant points, no duplicates, textbook-correct facts only. If source text is given, use only facts from it.

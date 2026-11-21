@@ -1,0 +1,11 @@
+.env
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+dist/
+backend/evals/results/*.json
+!backend/evals/results/.gitkeep
+.DS_Store

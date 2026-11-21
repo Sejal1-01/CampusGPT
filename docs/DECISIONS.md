@@ -1,0 +1,34 @@
+# Decisions
+
+Builder's-choice decisions and deviations from the PRD, with reasons.
+
+| # | Decision | Why |
+|---|---|---|
+| 1 | **Generative UI path: OpenUI (not the JSON fallback).** Our own component library (`frontend/src/genui/library.tsx`, root `Answer`) rendered with `<Renderer>` from `@openuidev/react-lang`; system-prompt section generated with `openui generate` into `backend/app/agent/prompts/openui_library.txt`. | The OpenUI renderer takes plain OpenUI Lang text, so it works with any streaming transport. |
+| 2 | **Own SSE protocol instead of OpenUI's `AgentInterface` + `fetchLLM`.** Events: `status`, `tool`, `text`, `reset`, `refusal`, `error`, `done`. | We need cookie auth, guardrail refusals, tool progress and a `reset` when the model writes text before a tool call. These don't fit the OpenAI-chunk adapter. |
+| 3 | **Charts and tables reference a server-side `result_id`** (`DataChart(resultId, kind, x, y)`, `DataTable(resultId)`); the browser fetches rows from `/api/results/{id}`. | The model never types data into a chart, so charts can't show invented numbers. The same id drives the "How I got this" panel and the CSV download. |
+| 4 | **Model IDs:** `MODEL_ID_MAIN=gemini-3.5-flash-lite`, `MODEL_ID_FAST=gemini-3.1-flash-lite` (Google AI Studio free tier, 15 RPM / 500 requests per day each). | Gemini 2.5 models are closed to new keys; 3.5/3.6/3.8 Flash allow only 20 requests per day on the free tier (about 5 questions). Gemma 4 31B (30 RPM, 14.4K/day) gave correct answers but was frequently overloaded (503). Change in `.env` only; with billing enabled, `gemini-3.8-flash` is the better main model. |
+| 5 | **MySQL runs on host port 3307** (`MYSQL_PORT` in `.env`). | 3306 was already in use on the development machine. |
+| 6 | **Session cookie:** random session id signed with `itsdangerous` (`SESSION_SECRET`), httpOnly, SameSite=Lax, 8-hour max age. The server keeps the session in memory (max 200, idle eviction after 60 minutes). | Simple, and a server restart clears all sessions as the PRD requires. |
+| 7 | **Identity binding:** tools are closures created per session (`app/agent/tools/build.py`). | The model can't pass a user id; scope always comes from the session. |
+| 8 | **`users` table has `display_name` and `dept_id`.** | Needed for the header and for department-scope binding without querying `campus` at login. |
+| 9 | **`course_offerings.dept_id` added,** plus pre-aggregated `attendance_summary` and `attendance_weekly` tables. | Department-wall filtering is a single column check, and attendance views read small tables (PRD §15.5). |
+| 10 | **Marks views are wide** (`mid1`, `mid2`, `assignment`, `end_sem`, `internal_percent`, `internal_pass`). "Pass percentage this semester" means internal ≥ 40%, because end-sem exams haven't happened yet (APP_TODAY 2026-11-11). | Easier text-to-SQL; gives one consistent definition for the demo rows. |
+| 11 | **Skip calculator is computed in SQL** (`can_skip`, `best_possible_percent` columns in every attendance view), mirrored by `app/services/attendance.py` for unit tests. If `held > planned`, `held` is treated as the total. | The model reads one column instead of doing arithmetic. |
+| 12 | **Extra logical views:** `student_residence` (hosteller flag + hostel, hostel domain), `*_attendance_weekly`, `*_feedback_themes`, `*_recurring_issues`. `is_hosteller` is shown only in hostel-domain views and the student's own profile. | The Dean has no hostel domain, so hosteller status isn't part of the Dean's `students` view. |
+| 13 | **`subjects` and `exam_timetable` are granted to (academics, self) and (academics, college) only.** | They are public to students; faculty-side users use their own scoped offerings views (department wall). |
+| 14 | **CTE names may not shadow any base table or view name.** | Otherwise a CTE named e.g. `marks` could stand in for a base table inside a rewritten template. |
+| 15 | **Guard also rejects optimizer hints (`/*+ ... */`).** | A hint could raise `MAX_EXECUTION_TIME` above 5 s. |
+| 16 | **Guardrail runs before the agent, not concurrently.** If the classifier itself fails (rate limit), the message is allowed through and the system prompt still refuses. | Running both in parallel would need the cancelled turn removed from Strands' history. The classifier costs about 1 s. |
+| 17 | **No separate "insight writer" prompt.** The main model writes the `Insight` component from the rows it just received; faithfulness is checked by the evals. | Saves a model call per answer. |
+| 18 | **Mock text:** feedback and complaints come from bilingual templates per theme and sentiment (PRD allows templating), so hand labels are exact. Tag tables are filled by `scripts/tag_text.py`. | Deterministic and free. |
+| 19 | **At-risk list is rule-based SQL over the user's own views** (college > department > advisees > own classes, whichever the user holds). The model writes the one-line reason per student. | Uses the same guard, rewrite and isolation path. |
+| 20 | **Platform admin has no chat** (`403`) and sees only the Access page. Access changes write `access_audit_log`. | PRD §4.2. |
+| 21 | **Backend is an installable package** (hatchling), so `uv run python scripts/...` can import `app`. | Removes `sys.path` hacks. |
+| 22 | **Postman collection is generated from OpenAPI** (`scripts/build_postman.py`); `tests/test_postman_coverage.py` fails if a route is missing. | Can't drift from the API. |
+| 23 | **SQL accuracy comparison:** order-insensitive column matching (extra generated columns allowed, tolerance 0.01); a one-row gold answer also matches the first row of an ordered list. | Standard execution-accuracy practice; documented in the report. |
+| 24 | **Judge model:** the fast model with a separate `judge.md` prompt, which is a different model from the main agent. | PRD §10.2. |
+| 25 | **Stretch tools are role-gated:** study plans need the student's own exam and marks views; question papers are for any non-student role; accreditation drafts need department- or college-wide views. | Students can't generate exam papers, and the narrative only cites in-scope numbers. |
+| 26 | **Spaced revision** queues wrong quiz questions in the session; two user turns later a system note asks the model to call `revision_quiz()`, which reuses the same questions with shuffled options. | Stays within the session-only memory rule. |
+| 27 | **CSV upload** goes into a per-session in-memory SQLite database. Queries pass the same sqlglot guard with only the uploaded table names allowed, plus a step limit. Uploaded data never touches MySQL. | No write access to MySQL is needed, and data disappears with the session. |
+| 28 | **Saved dashboards** live in browser localStorage; tiles re-run their SQL through `POST /api/results/rerun`, which applies the current user's allow-list and scope rewrite. | A pinned query can't widen access, even if localStorage is edited. |

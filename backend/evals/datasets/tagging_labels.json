@@ -1,0 +1,500 @@
+{
+  "feedback": [
+    {
+      "id": 42,
+      "text": "Exam paas hai aur aadha syllabus baaki hai. Please isko improve kijiye.",
+      "sentiment": "negative",
+      "themes": [
+        "syllabus_coverage"
+      ]
+    },
+    {
+      "id": 62,
+      "text": "Bahut strict hain, koi baat karne se darta hai.",
+      "sentiment": "negative",
+      "themes": [
+        "approachability"
+      ]
+    },
+    {
+      "id": 103,
+      "text": "Not good.",
+      "sentiment": "negative",
+      "themes": [
+        "other"
+      ]
+    },
+    {
+      "id": 191,
+      "text": "Doubt poocho to bas 'book padh lo' bol diya jaata hai.",
+      "sentiment": "negative",
+      "themes": [
+        "doubt_solving"
+      ]
+    },
+    {
+      "id": 194,
+      "text": "Marking bilkul fair hai, copies bhi dikhayi jaati hain. Lekin kuch bhi clear nahi hota, bas board pe likh ke chhod diya jaata hai.",
+      "sentiment": "neutral",
+      "themes": [
+        "assessment_fairness",
+        "clarity"
+      ]
+    },
+    {
+      "id": 207,
+      "text": "Many classes were cancelled without any notice. Very strict and not approachable at all.",
+      "sentiment": "negative",
+      "themes": [
+        "punctuality",
+        "approachability"
+      ]
+    },
+    {
+      "id": 246,
+      "text": "Easy to talk to about anything, even career advice. Thank you Sir!",
+      "sentiment": "positive",
+      "themes": [
+        "approachability"
+      ]
+    },
+    {
+      "id": 261,
+      "text": "Lectures are rushed. Please slow down, half the class is lost. Hope this improves next semester.",
+      "sentiment": "negative",
+      "themes": [
+        "pace"
+      ]
+    },
+    {
+      "id": 374,
+      "text": "Neither too strict nor too friendly. Marking is a bit strict but okay.",
+      "sentiment": "neutral",
+      "themes": [
+        "approachability",
+        "assessment_fairness"
+      ]
+    },
+    {
+      "id": 377,
+      "text": "Very strict and not approachable at all.",
+      "sentiment": "negative",
+      "themes": [
+        "approachability"
+      ]
+    },
+    {
+      "id": 378,
+      "text": "Asking a doubt feels pointless, it never gets answered properly. Please look into this.",
+      "sentiment": "negative",
+      "themes": [
+        "doubt_solving"
+      ]
+    },
+    {
+      "id": 388,
+      "text": "Baat kar sakte hain par cabin mein milna mushkil hai.",
+      "sentiment": "neutral",
+      "themes": [
+        "approachability"
+      ]
+    },
+    {
+      "id": 409,
+      "text": "Not good.",
+      "sentiment": "negative",
+      "themes": [
+        "other"
+      ]
+    },
+    {
+      "id": 427,
+      "text": "Class bahut rush hoti hai, ek topic khatam nahi hota aur doosra shuru.",
+      "sentiment": "negative",
+      "themes": [
+        "pace"
+      ]
+    },
+    {
+      "id": 448,
+      "text": "Ma'am bahut fast padhati hain, kuch samajh nahi aata. Doubts kabhi clear nahi hote, poochne mein bhi darr lagta hai.",
+      "sentiment": "negative",
+      "themes": [
+        "pace",
+        "doubt_solving"
+      ]
+    },
+    {
+      "id": 452,
+      "text": "The pace of teaching is just right and easy to follow. However, explanations are confusing and jump between topics.",
+      "sentiment": "neutral",
+      "themes": [
+        "pace",
+        "clarity"
+      ]
+    },
+    {
+      "id": 471,
+      "text": "Pace is okay most of the time, a few lectures felt rushed.",
+      "sentiment": "neutral",
+      "themes": [
+        "pace"
+      ]
+    },
+    {
+      "id": 489,
+      "text": "Marking bilkul fair hai, copies bhi dikhayi jaati hain.",
+      "sentiment": "positive",
+      "themes": [
+        "assessment_fairness"
+      ]
+    },
+    {
+      "id": 592,
+      "text": "Punctuality is fine.",
+      "sentiment": "neutral",
+      "themes": [
+        "punctuality"
+      ]
+    },
+    {
+      "id": 601,
+      "text": "Sir ki teaching speed ekdum sahi hai, sab follow ho jata hai.",
+      "sentiment": "positive",
+      "themes": [
+        "pace"
+      ]
+    },
+    {
+      "id": 616,
+      "text": "Sir se kuch poochna matlab daant khana.",
+      "sentiment": "negative",
+      "themes": [
+        "approachability"
+      ]
+    },
+    {
+      "id": 628,
+      "text": "Sir is very punctual and never wastes class time.",
+      "sentiment": "positive",
+      "themes": [
+        "punctuality"
+      ]
+    },
+    {
+      "id": 668,
+      "text": "Sir hamesha time pe aate hain, ek bhi class miss nahi hui. Doubt poochne pe Sir bahut patiently samjhate hain. Aise hi padhate rahiye.",
+      "sentiment": "positive",
+      "themes": [
+        "punctuality",
+        "doubt_solving"
+      ]
+    },
+    {
+      "id": 691,
+      "text": "Sir ke slides aur PDFs bahut helpful hain.",
+      "sentiment": "positive",
+      "themes": [
+        "teaching_material"
+      ]
+    },
+    {
+      "id": 708,
+      "text": "Notes bahut acche hain, exam ke liye kaafi hain. Lekin bina bataye class cancel ho jaati hai, bahut problem hoti hai.",
+      "sentiment": "neutral",
+      "themes": [
+        "teaching_material",
+        "punctuality"
+      ]
+    },
+    {
+      "id": 788,
+      "text": "Doubts kabhi clear nahi hote, poochne mein bhi darr lagta hai.",
+      "sentiment": "negative",
+      "themes": [
+        "doubt_solving"
+      ]
+    },
+    {
+      "id": 825,
+      "text": "Explanations are confusing and jump between topics. Lectures are rushed. Please slow down, half the class is lost. Please look into this.",
+      "sentiment": "negative",
+      "themes": [
+        "clarity",
+        "pace"
+      ]
+    },
+    {
+      "id": 836,
+      "text": "Itni speed mein padhati hain ki notes bhi nahi ban pate, thoda slow kijiye. Please isko improve kijiye.",
+      "sentiment": "negative",
+      "themes": [
+        "pace"
+      ]
+    },
+    {
+      "id": 849,
+      "text": "Doubts are answered, but there is rarely time for them. Marking is a bit strict but okay.",
+      "sentiment": "neutral",
+      "themes": [
+        "doubt_solving",
+        "assessment_fairness"
+      ]
+    },
+    {
+      "id": 933,
+      "text": "Syllabus time se pehle khatam ho gaya, revision bhi hua. Padhane ki speed perfect hai, notes banane ka time mil jata hai.",
+      "sentiment": "positive",
+      "themes": [
+        "syllabus_coverage",
+        "pace"
+      ]
+    },
+    {
+      "id": 936,
+      "text": "Every unit is covered properly with revision at the end. Keep it up.",
+      "sentiment": "positive",
+      "themes": [
+        "syllabus_coverage"
+      ]
+    },
+    {
+      "id": 950,
+      "text": "Mid-sem paper lamba tha, baaki theek.",
+      "sentiment": "neutral",
+      "themes": [
+        "assessment_fairness"
+      ]
+    },
+    {
+      "id": 1008,
+      "text": "Mid-sem paper lamba tha, baaki theek.",
+      "sentiment": "neutral",
+      "themes": [
+        "assessment_fairness"
+      ]
+    },
+    {
+      "id": 1089,
+      "text": "Classes always start and end on time. However, half the syllabus is still not covered and exams are near.",
+      "sentiment": "neutral",
+      "themes": [
+        "punctuality",
+        "syllabus_coverage"
+      ]
+    },
+    {
+      "id": 1096,
+      "text": "Evaluation is fair and answer sheets are shown to us.",
+      "sentiment": "positive",
+      "themes": [
+        "assessment_fairness"
+      ]
+    },
+    {
+      "id": 1135,
+      "text": "Saare units properly cover hue, exam ki tension nahi. Padhane ki speed perfect hai, notes banane ka time mil jata hai.",
+      "sentiment": "positive",
+      "themes": [
+        "syllabus_coverage",
+        "pace"
+      ]
+    },
+    {
+      "id": 1158,
+      "text": "Marking is transparent and the mid-sem papers are fair. Notes and slides shared are excellent for exam prep. Thank you Sir!",
+      "sentiment": "positive",
+      "themes": [
+        "assessment_fairness",
+        "teaching_material"
+      ]
+    },
+    {
+      "id": 1173,
+      "text": "Clarity is average, most of it makes sense after revising.",
+      "sentiment": "neutral",
+      "themes": [
+        "clarity"
+      ]
+    },
+    {
+      "id": 1184,
+      "text": "The whole syllabus was covered well before the exams.",
+      "sentiment": "positive",
+      "themes": [
+        "syllabus_coverage"
+      ]
+    },
+    {
+      "id": 1207,
+      "text": "Padhane ki speed perfect hai, notes banane ka time mil jata hai. Lekin concepts bilkul samajh nahi aate, explanation bahut confusing hai.",
+      "sentiment": "neutral",
+      "themes": [
+        "pace",
+        "clarity"
+      ]
+    }
+  ],
+  "complaints": [
+    {
+      "id": 2,
+      "text": "Saw cockroaches near the serving counter in Mess 2. Hygiene is terrible.",
+      "sentiment": "negative",
+      "themes": [
+        "hygiene"
+      ]
+    },
+    {
+      "id": 9,
+      "text": "Corridor mein kachra pada rehta hai Academic Block B mein.",
+      "sentiment": "negative",
+      "themes": [
+        "cleanliness"
+      ]
+    },
+    {
+      "id": 61,
+      "text": "Please keep Lecture Hall 3 open till midnight during exams.",
+      "sentiment": "neutral",
+      "themes": [
+        "other"
+      ]
+    },
+    {
+      "id": 111,
+      "text": "Request to add more fruits and a weekly special in Mess 1.",
+      "sentiment": "neutral",
+      "themes": [
+        "menu_variety"
+      ]
+    },
+    {
+      "id": 112,
+      "text": "Saw cockroaches near the serving counter in Mess 2. Hygiene is terrible.",
+      "sentiment": "negative",
+      "themes": [
+        "hygiene"
+      ]
+    },
+    {
+      "id": 129,
+      "text": "Please keep ECE Lab 1 open till midnight during exams.",
+      "sentiment": "neutral",
+      "themes": [
+        "other"
+      ]
+    },
+    {
+      "id": 130,
+      "text": "Several benches in Central Library are broken.",
+      "sentiment": "negative",
+      "themes": [
+        "other"
+      ]
+    },
+    {
+      "id": 147,
+      "text": "Lecture Hall 3 mein projector kharab hai, padhai mein dikkat.",
+      "sentiment": "negative",
+      "themes": [
+        "other"
+      ]
+    },
+    {
+      "id": 191,
+      "text": "Main gate of Girls Hostel is left unattended at night.",
+      "sentiment": "negative",
+      "themes": [
+        "security"
+      ]
+    },
+    {
+      "id": 197,
+      "text": "Cycle chori ho gayi Girls Hostel se, CCTV kaam nahi kar raha.",
+      "sentiment": "negative",
+      "themes": [
+        "security"
+      ]
+    },
+    {
+      "id": 216,
+      "text": "Plates in Mess 2 are not washed properly, very unhygienic.",
+      "sentiment": "negative",
+      "themes": [
+        "hygiene"
+      ]
+    },
+    {
+      "id": 219,
+      "text": "Cannot connect to the WiFi in Academic Block B for 3 days now.",
+      "sentiment": "negative",
+      "themes": [
+        "wifi"
+      ]
+    },
+    {
+      "id": 227,
+      "text": "Central Library mein projector kharab hai, padhai mein dikkat.",
+      "sentiment": "negative",
+      "themes": [
+        "other"
+      ]
+    },
+    {
+      "id": 260,
+      "text": "Power cuts in ECE Lab 1 every evening and the backup does not work.",
+      "sentiment": "negative",
+      "themes": [
+        "electricity"
+      ]
+    },
+    {
+      "id": 262,
+      "text": "Hot water is not available in Girls Hostel in the mornings.",
+      "sentiment": "negative",
+      "themes": [
+        "water_supply"
+      ]
+    },
+    {
+      "id": 274,
+      "text": "Mess 1 mein Sunday ko kuch special add kar sakte hain kya?",
+      "sentiment": "neutral",
+      "themes": [
+        "menu_variety"
+      ]
+    },
+    {
+      "id": 276,
+      "text": "Mess 2 ke counter pe cockroach ghoom rahe the, safai bilkul nahi hoti.",
+      "sentiment": "negative",
+      "themes": [
+        "hygiene"
+      ]
+    },
+    {
+      "id": 292,
+      "text": "Room B-102 ka fan kharab hai, complaint ke baad bhi koi nahi aaya.",
+      "sentiment": "negative",
+      "themes": [
+        "room_maintenance"
+      ]
+    },
+    {
+      "id": 297,
+      "text": "Plates in Mess 2 are not washed properly, very unhygienic.",
+      "sentiment": "negative",
+      "themes": [
+        "hygiene"
+      ]
+    },
+    {
+      "id": 299,
+      "text": "Mess 3 mein roz wahi aloo ki sabzi, menu change karo please.",
+      "sentiment": "negative",
+      "themes": [
+        "menu_variety"
+      ]
+    }
+  ]
+}

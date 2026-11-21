@@ -1,0 +1,4320 @@
+{
+  "info": {
+    "name": "CampusGPT API",
+    "description": "Every CampusGPT endpoint. Run 'Login' first; the session cookie is reused automatically.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "GET /api/auth/demo-accounts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/demo-accounts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "demo-accounts"
+              ]
+            },
+            "description": "Seeded demo accounts listed on the login page.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/demo-accounts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "demo-accounts"
+                  ]
+                },
+                "description": "Seeded demo accounts listed on the login page.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            }
+          ]
+        },
+        {
+          "name": "POST /api/auth/login",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Log in and set the session cookie.",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{studentUser}}\",\n  \"password\": \"{{demoPassword}}\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);",
+                  "pm.test('has username and roles', () => { const body = pm.response.json(); pm.expect(body).to.have.property('username'); pm.expect(body.roles).to.be.an('array'); });"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                },
+                "description": "Log in and set the session cookie.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"{{studentUser}}\",\n  \"password\": \"{{demoPassword}}\"\n}"
+                }
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                },
+                "description": "Log in and set the session cookie.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"{{studentUser}}\",\n  \"password\": \"{{demoPassword}}\"\n}"
+                }
+              },
+              "code": 400,
+              "status": "Bad request",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"invalid_request\", \"message\": \"Invalid message: Field required\"}}"
+            }
+          ]
+        },
+        {
+          "name": "POST /api/auth/logout",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "logout"
+              ]
+            },
+            "description": "Log out; clears the session and chat history.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/logout",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "logout"
+                  ]
+                },
+                "description": "Log out; clears the session and chat history.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/logout",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "logout"
+                  ]
+                },
+                "description": "Log out; clears the session and chat history.",
+                "header": []
+              },
+              "code": 400,
+              "status": "Bad request",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"invalid_request\", \"message\": \"Invalid message: Field required\"}}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/logout",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "logout"
+                  ]
+                },
+                "description": "Log out; clears the session and chat history.",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "GET /api/auth/me",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            },
+            "description": "Current user's name, data roles and allowed areas.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "me"
+                  ]
+                },
+                "description": "Current user's name, data roles and allowed areas.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "me"
+                  ]
+                },
+                "description": "Current user's name, data roles and allowed areas.",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Chat",
+      "item": [
+        {
+          "name": "POST /api/chat",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/chat",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "chat"
+              ]
+            },
+            "description": "Send a message; the reply streams back as Server-Sent Events.",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"What's my attendance in DBMS and how many more can I skip?\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('is an SSE stream', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('text/event-stream'));"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/chat",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "chat"
+                  ]
+                },
+                "description": "Send a message; the reply streams back as Server-Sent Events.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"What's my attendance in DBMS and how many more can I skip?\"\n}"
+                }
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/event-stream"
+                }
+              ],
+              "body": "data: {\"type\":\"status\",\"text\":\"Checking your question\"}\n\ndata: {\"type\":\"done\",\"latency_ms\":2310}\n\n"
+            },
+            {
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/chat",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "chat"
+                  ]
+                },
+                "description": "Send a message; the reply streams back as Server-Sent Events.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"What's my attendance in DBMS and how many more can I skip?\"\n}"
+                }
+              },
+              "code": 400,
+              "status": "Bad request",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"invalid_request\", \"message\": \"Invalid message: Field required\"}}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/chat",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "chat"
+                  ]
+                },
+                "description": "Send a message; the reply streams back as Server-Sent Events.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"What's my attendance in DBMS and how many more can I skip?\"\n}"
+                }
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Busy",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/chat",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "chat"
+                  ]
+                },
+                "description": "Send a message; the reply streams back as Server-Sent Events.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"What's my attendance in DBMS and how many more can I skip?\"\n}"
+                }
+              },
+              "code": 409,
+              "status": "Busy",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"busy\", \"message\": \"Still answering your previous question.\"}}"
+            },
+            {
+              "name": "Database down",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/chat",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "chat"
+                  ]
+                },
+                "description": "Send a message; the reply streams back as Server-Sent Events.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"What's my attendance in DBMS and how many more can I skip?\"\n}"
+                }
+              },
+              "code": 503,
+              "status": "Database down",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unavailable\", \"message\": \"The portal database is down. Please try again shortly.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "POST /api/chat/reset",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/chat/reset",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "chat",
+                "reset"
+              ]
+            },
+            "description": "New chat: clears the conversation history.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/chat/reset",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "chat",
+                    "reset"
+                  ]
+                },
+                "description": "New chat: clears the conversation history.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/chat/reset",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "chat",
+                    "reset"
+                  ]
+                },
+                "description": "New chat: clears the conversation history.",
+                "header": []
+              },
+              "code": 400,
+              "status": "Bad request",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"invalid_request\", \"message\": \"Invalid message: Field required\"}}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/chat/reset",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "chat",
+                    "reset"
+                  ]
+                },
+                "description": "New chat: clears the conversation history.",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Access",
+      "item": [
+        {
+          "name": "GET /api/access/overview",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/access/overview",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "access",
+                "overview"
+              ]
+            },
+            "description": "Roles, groups, users, data domains and scopes.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/overview",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "overview"
+                  ]
+                },
+                "description": "Roles, groups, users, data domains and scopes.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/overview",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "overview"
+                  ]
+                },
+                "description": "Roles, groups, users, data domains and scopes.",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/overview",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "overview"
+                  ]
+                },
+                "description": "Roles, groups, users, data domains and scopes.",
+                "header": []
+              },
+              "code": 403,
+              "status": "Forbidden",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"forbidden\", \"message\": \"Only the platform admin can manage access.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "GET /api/access/users/{username}/effective",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/access/users/faculty1/effective",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "access",
+                "users",
+                "faculty1",
+                "effective"
+              ]
+            },
+            "description": "A user's effective access and where each grant came from.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users/faculty1/effective",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users",
+                    "faculty1",
+                    "effective"
+                  ]
+                },
+                "description": "A user's effective access and where each grant came from.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users/faculty1/effective",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users",
+                    "faculty1",
+                    "effective"
+                  ]
+                },
+                "description": "A user's effective access and where each grant came from.",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users/faculty1/effective",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users",
+                    "faculty1",
+                    "effective"
+                  ]
+                },
+                "description": "A user's effective access and where each grant came from.",
+                "header": []
+              },
+              "code": 403,
+              "status": "Forbidden",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"forbidden\", \"message\": \"Only the platform admin can manage access.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "POST /api/access/groups",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/access/groups",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "access",
+                "groups"
+              ]
+            },
+            "description": "Create a user group.",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Timetable Committee\",\n  \"description\": \"Builds timetables\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "groups"
+                  ]
+                },
+                "description": "Create a user group.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Timetable Committee\",\n  \"description\": \"Builds timetables\"\n}"
+                }
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "groups"
+                  ]
+                },
+                "description": "Create a user group.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Timetable Committee\",\n  \"description\": \"Builds timetables\"\n}"
+                }
+              },
+              "code": 400,
+              "status": "Bad request",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"invalid_request\", \"message\": \"Invalid message: Field required\"}}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "groups"
+                  ]
+                },
+                "description": "Create a user group.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Timetable Committee\",\n  \"description\": \"Builds timetables\"\n}"
+                }
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "groups"
+                  ]
+                },
+                "description": "Create a user group.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Timetable Committee\",\n  \"description\": \"Builds timetables\"\n}"
+                }
+              },
+              "code": 403,
+              "status": "Forbidden",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"forbidden\", \"message\": \"Only the platform admin can manage access.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "DELETE /api/access/groups/{name}",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/access/groups/Timetable Committee",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "access",
+                "groups",
+                "Timetable Committee"
+              ]
+            },
+            "description": "Delete a user group.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/groups/Timetable Committee",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "groups",
+                    "Timetable Committee"
+                  ]
+                },
+                "description": "Delete a user group.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/groups/Timetable Committee",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "groups",
+                    "Timetable Committee"
+                  ]
+                },
+                "description": "Delete a user group.",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/groups/Timetable Committee",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "groups",
+                    "Timetable Committee"
+                  ]
+                },
+                "description": "Delete a user group.",
+                "header": []
+              },
+              "code": 403,
+              "status": "Forbidden",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"forbidden\", \"message\": \"Only the platform admin can manage access.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "POST /api/access/groups/{name}/members",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/access/groups/Timetable Committee/members",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "access",
+                "groups",
+                "Timetable Committee",
+                "members"
+              ]
+            },
+            "description": "Add a user to a group.",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"faculty1\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/groups/Timetable Committee/members",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "groups",
+                    "Timetable Committee",
+                    "members"
+                  ]
+                },
+                "description": "Add a user to a group.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"faculty1\"\n}"
+                }
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/groups/Timetable Committee/members",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "groups",
+                    "Timetable Committee",
+                    "members"
+                  ]
+                },
+                "description": "Add a user to a group.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"faculty1\"\n}"
+                }
+              },
+              "code": 400,
+              "status": "Bad request",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"invalid_request\", \"message\": \"Invalid message: Field required\"}}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/groups/Timetable Committee/members",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "groups",
+                    "Timetable Committee",
+                    "members"
+                  ]
+                },
+                "description": "Add a user to a group.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"faculty1\"\n}"
+                }
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/groups/Timetable Committee/members",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "groups",
+                    "Timetable Committee",
+                    "members"
+                  ]
+                },
+                "description": "Add a user to a group.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"faculty1\"\n}"
+                }
+              },
+              "code": 403,
+              "status": "Forbidden",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"forbidden\", \"message\": \"Only the platform admin can manage access.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "DELETE /api/access/groups/{name}/members/{username}",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/access/groups/Timetable Committee/members/faculty1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "access",
+                "groups",
+                "Timetable Committee",
+                "members",
+                "faculty1"
+              ]
+            },
+            "description": "Remove a user from a group.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/groups/Timetable Committee/members/faculty1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "groups",
+                    "Timetable Committee",
+                    "members",
+                    "faculty1"
+                  ]
+                },
+                "description": "Remove a user from a group.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/groups/Timetable Committee/members/faculty1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "groups",
+                    "Timetable Committee",
+                    "members",
+                    "faculty1"
+                  ]
+                },
+                "description": "Remove a user from a group.",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/groups/Timetable Committee/members/faculty1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "groups",
+                    "Timetable Committee",
+                    "members",
+                    "faculty1"
+                  ]
+                },
+                "description": "Remove a user from a group.",
+                "header": []
+              },
+              "code": 403,
+              "status": "Forbidden",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"forbidden\", \"message\": \"Only the platform admin can manage access.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "POST /api/access/grants",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/access/grants",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "access",
+                "grants"
+              ]
+            },
+            "description": "Grant a (domain, scope) to a role, group or user.",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kind\": \"user\",\n  \"target\": \"faculty1\",\n  \"domain\": \"hostel\",\n  \"scope\": \"college\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/grants",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "grants"
+                  ]
+                },
+                "description": "Grant a (domain, scope) to a role, group or user.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"user\",\n  \"target\": \"faculty1\",\n  \"domain\": \"hostel\",\n  \"scope\": \"college\"\n}"
+                }
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/grants",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "grants"
+                  ]
+                },
+                "description": "Grant a (domain, scope) to a role, group or user.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"user\",\n  \"target\": \"faculty1\",\n  \"domain\": \"hostel\",\n  \"scope\": \"college\"\n}"
+                }
+              },
+              "code": 400,
+              "status": "Bad request",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"invalid_request\", \"message\": \"Invalid message: Field required\"}}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/grants",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "grants"
+                  ]
+                },
+                "description": "Grant a (domain, scope) to a role, group or user.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"user\",\n  \"target\": \"faculty1\",\n  \"domain\": \"hostel\",\n  \"scope\": \"college\"\n}"
+                }
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/grants",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "grants"
+                  ]
+                },
+                "description": "Grant a (domain, scope) to a role, group or user.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"user\",\n  \"target\": \"faculty1\",\n  \"domain\": \"hostel\",\n  \"scope\": \"college\"\n}"
+                }
+              },
+              "code": 403,
+              "status": "Forbidden",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"forbidden\", \"message\": \"Only the platform admin can manage access.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "POST /api/access/grants/revoke",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/access/grants/revoke",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "access",
+                "grants",
+                "revoke"
+              ]
+            },
+            "description": "Revoke a (domain, scope) from a role, group or user.",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kind\": \"user\",\n  \"target\": \"faculty1\",\n  \"domain\": \"hostel\",\n  \"scope\": \"college\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/grants/revoke",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "grants",
+                    "revoke"
+                  ]
+                },
+                "description": "Revoke a (domain, scope) from a role, group or user.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"user\",\n  \"target\": \"faculty1\",\n  \"domain\": \"hostel\",\n  \"scope\": \"college\"\n}"
+                }
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/grants/revoke",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "grants",
+                    "revoke"
+                  ]
+                },
+                "description": "Revoke a (domain, scope) from a role, group or user.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"user\",\n  \"target\": \"faculty1\",\n  \"domain\": \"hostel\",\n  \"scope\": \"college\"\n}"
+                }
+              },
+              "code": 400,
+              "status": "Bad request",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"invalid_request\", \"message\": \"Invalid message: Field required\"}}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/grants/revoke",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "grants",
+                    "revoke"
+                  ]
+                },
+                "description": "Revoke a (domain, scope) from a role, group or user.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"user\",\n  \"target\": \"faculty1\",\n  \"domain\": \"hostel\",\n  \"scope\": \"college\"\n}"
+                }
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/grants/revoke",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "grants",
+                    "revoke"
+                  ]
+                },
+                "description": "Revoke a (domain, scope) from a role, group or user.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"user\",\n  \"target\": \"faculty1\",\n  \"domain\": \"hostel\",\n  \"scope\": \"college\"\n}"
+                }
+              },
+              "code": 403,
+              "status": "Forbidden",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"forbidden\", \"message\": \"Only the platform admin can manage access.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "POST /api/access/users/{username}/roles",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/access/users/faculty1/roles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "access",
+                "users",
+                "faculty1",
+                "roles"
+              ]
+            },
+            "description": "Assign a role to a user.",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"advisor\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users/faculty1/roles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users",
+                    "faculty1",
+                    "roles"
+                  ]
+                },
+                "description": "Assign a role to a user.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"role\": \"advisor\"\n}"
+                }
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users/faculty1/roles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users",
+                    "faculty1",
+                    "roles"
+                  ]
+                },
+                "description": "Assign a role to a user.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"role\": \"advisor\"\n}"
+                }
+              },
+              "code": 400,
+              "status": "Bad request",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"invalid_request\", \"message\": \"Invalid message: Field required\"}}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users/faculty1/roles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users",
+                    "faculty1",
+                    "roles"
+                  ]
+                },
+                "description": "Assign a role to a user.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"role\": \"advisor\"\n}"
+                }
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users/faculty1/roles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users",
+                    "faculty1",
+                    "roles"
+                  ]
+                },
+                "description": "Assign a role to a user.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"role\": \"advisor\"\n}"
+                }
+              },
+              "code": 403,
+              "status": "Forbidden",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"forbidden\", \"message\": \"Only the platform admin can manage access.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "DELETE /api/access/users/{username}/roles/{role}",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/access/users/faculty1/roles/advisor",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "access",
+                "users",
+                "faculty1",
+                "roles",
+                "advisor"
+              ]
+            },
+            "description": "Remove a role from a user.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users/faculty1/roles/advisor",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users",
+                    "faculty1",
+                    "roles",
+                    "advisor"
+                  ]
+                },
+                "description": "Remove a role from a user.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users/faculty1/roles/advisor",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users",
+                    "faculty1",
+                    "roles",
+                    "advisor"
+                  ]
+                },
+                "description": "Remove a role from a user.",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users/faculty1/roles/advisor",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users",
+                    "faculty1",
+                    "roles",
+                    "advisor"
+                  ]
+                },
+                "description": "Remove a role from a user.",
+                "header": []
+              },
+              "code": 403,
+              "status": "Forbidden",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"forbidden\", \"message\": \"Only the platform admin can manage access.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "POST /api/access/users",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/access/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "access",
+                "users"
+              ]
+            },
+            "description": "Create a user (no roles until assigned).",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"warden1\",\n  \"display_name\": \"Hostel Warden\",\n  \"password\": \"{{newUserPassword}}\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users"
+                  ]
+                },
+                "description": "Create a user (no roles until assigned).",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"warden1\",\n  \"display_name\": \"Hostel Warden\",\n  \"password\": \"{{newUserPassword}}\"\n}"
+                }
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users"
+                  ]
+                },
+                "description": "Create a user (no roles until assigned).",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"warden1\",\n  \"display_name\": \"Hostel Warden\",\n  \"password\": \"{{newUserPassword}}\"\n}"
+                }
+              },
+              "code": 400,
+              "status": "Bad request",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"invalid_request\", \"message\": \"Invalid message: Field required\"}}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users"
+                  ]
+                },
+                "description": "Create a user (no roles until assigned).",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"warden1\",\n  \"display_name\": \"Hostel Warden\",\n  \"password\": \"{{newUserPassword}}\"\n}"
+                }
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users"
+                  ]
+                },
+                "description": "Create a user (no roles until assigned).",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"warden1\",\n  \"display_name\": \"Hostel Warden\",\n  \"password\": \"{{newUserPassword}}\"\n}"
+                }
+              },
+              "code": 403,
+              "status": "Forbidden",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"forbidden\", \"message\": \"Only the platform admin can manage access.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "POST /api/access/users/{username}/password",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/access/users/faculty1/password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "access",
+                "users",
+                "faculty1",
+                "password"
+              ]
+            },
+            "description": "Reset a user's password.",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"password\": \"{{newUserPassword}}\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users/faculty1/password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users",
+                    "faculty1",
+                    "password"
+                  ]
+                },
+                "description": "Reset a user's password.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"{{newUserPassword}}\"\n}"
+                }
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users/faculty1/password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users",
+                    "faculty1",
+                    "password"
+                  ]
+                },
+                "description": "Reset a user's password.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"{{newUserPassword}}\"\n}"
+                }
+              },
+              "code": 400,
+              "status": "Bad request",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"invalid_request\", \"message\": \"Invalid message: Field required\"}}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users/faculty1/password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users",
+                    "faculty1",
+                    "password"
+                  ]
+                },
+                "description": "Reset a user's password.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"{{newUserPassword}}\"\n}"
+                }
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/users/faculty1/password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "users",
+                    "faculty1",
+                    "password"
+                  ]
+                },
+                "description": "Reset a user's password.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"{{newUserPassword}}\"\n}"
+                }
+              },
+              "code": 403,
+              "status": "Forbidden",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"forbidden\", \"message\": \"Only the platform admin can manage access.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "GET /api/access/audit",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/access/audit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "access",
+                "audit"
+              ]
+            },
+            "description": "Recent access changes: who changed which grant, and when.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/audit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "audit"
+                  ]
+                },
+                "description": "Recent access changes: who changed which grant, and when.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/audit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "audit"
+                  ]
+                },
+                "description": "Recent access changes: who changed which grant, and when.",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/access/audit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "access",
+                    "audit"
+                  ]
+                },
+                "description": "Recent access changes: who changed which grant, and when.",
+                "header": []
+              },
+              "code": 403,
+              "status": "Forbidden",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"forbidden\", \"message\": \"Only the platform admin can manage access.\"}}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "GET /api/results/{result_id}",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/results/{{resultId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "results",
+                "{{resultId}}"
+              ]
+            },
+            "description": "A stored query result with its SQL and explanation.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/results/{{resultId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "results",
+                    "{{resultId}}"
+                  ]
+                },
+                "description": "A stored query result with its SQL and explanation.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/results/{{resultId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "results",
+                    "{{resultId}}"
+                  ]
+                },
+                "description": "A stored query result with its SQL and explanation.",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Not found",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/results/{{resultId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "results",
+                    "{{resultId}}"
+                  ]
+                },
+                "description": "A stored query result with its SQL and explanation.",
+                "header": []
+              },
+              "code": 404,
+              "status": "Not found",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"not_found\", \"message\": \"That result has expired. Ask the question again.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "GET /api/results/{result_id}/csv",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/results/{{resultId}}/csv",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "results",
+                "{{resultId}}",
+                "csv"
+              ]
+            },
+            "description": "Download a stored result as CSV.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/results/{{resultId}}/csv",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "results",
+                    "{{resultId}}",
+                    "csv"
+                  ]
+                },
+                "description": "Download a stored result as CSV.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/results/{{resultId}}/csv",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "results",
+                    "{{resultId}}",
+                    "csv"
+                  ]
+                },
+                "description": "Download a stored result as CSV.",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Not found",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/results/{{resultId}}/csv",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "results",
+                    "{{resultId}}",
+                    "csv"
+                  ]
+                },
+                "description": "Download a stored result as CSV.",
+                "header": []
+              },
+              "code": 404,
+              "status": "Not found",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"not_found\", \"message\": \"That result has expired. Ask the question again.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "GET /api/quiz/{quiz_id}",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/quiz/{{quizId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "quiz",
+                "{{quizId}}"
+              ]
+            },
+            "description": "Quiz questions without answers (answers come only after submit).",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/quiz/{{quizId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "quiz",
+                    "{{quizId}}"
+                  ]
+                },
+                "description": "Quiz questions without answers (answers come only after submit).",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/quiz/{{quizId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "quiz",
+                    "{{quizId}}"
+                  ]
+                },
+                "description": "Quiz questions without answers (answers come only after submit).",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Not found",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/quiz/{{quizId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "quiz",
+                    "{{quizId}}"
+                  ]
+                },
+                "description": "Quiz questions without answers (answers come only after submit).",
+                "header": []
+              },
+              "code": 404,
+              "status": "Not found",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"not_found\", \"message\": \"That result has expired. Ask the question again.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "POST /api/quiz/{quiz_id}/submit",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/quiz/{{quizId}}/submit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "quiz",
+                "{{quizId}}",
+                "submit"
+              ]
+            },
+            "description": "Submit answers; returns score, per-question result and re-explanations.",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"answers\": [\n    0,\n    2,\n    null,\n    1,\n    3\n  ]\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/quiz/{{quizId}}/submit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "quiz",
+                    "{{quizId}}",
+                    "submit"
+                  ]
+                },
+                "description": "Submit answers; returns score, per-question result and re-explanations.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"answers\": [\n    0,\n    2,\n    null,\n    1,\n    3\n  ]\n}"
+                }
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/quiz/{{quizId}}/submit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "quiz",
+                    "{{quizId}}",
+                    "submit"
+                  ]
+                },
+                "description": "Submit answers; returns score, per-question result and re-explanations.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"answers\": [\n    0,\n    2,\n    null,\n    1,\n    3\n  ]\n}"
+                }
+              },
+              "code": 400,
+              "status": "Bad request",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"invalid_request\", \"message\": \"Invalid message: Field required\"}}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/quiz/{{quizId}}/submit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "quiz",
+                    "{{quizId}}",
+                    "submit"
+                  ]
+                },
+                "description": "Submit answers; returns score, per-question result and re-explanations.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"answers\": [\n    0,\n    2,\n    null,\n    1,\n    3\n  ]\n}"
+                }
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Not found",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/quiz/{{quizId}}/submit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "quiz",
+                    "{{quizId}}",
+                    "submit"
+                  ]
+                },
+                "description": "Submit answers; returns score, per-question result and re-explanations.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"answers\": [\n    0,\n    2,\n    null,\n    1,\n    3\n  ]\n}"
+                }
+              },
+              "code": 404,
+              "status": "Not found",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"not_found\", \"message\": \"That result has expired. Ask the question again.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "GET /api/flashcards/{set_id}",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/flashcards/{{flashcardSetId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "flashcards",
+                "{{flashcardSetId}}"
+              ]
+            },
+            "description": "A generated flashcard set.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/flashcards/{{flashcardSetId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "flashcards",
+                    "{{flashcardSetId}}"
+                  ]
+                },
+                "description": "A generated flashcard set.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/flashcards/{{flashcardSetId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "flashcards",
+                    "{{flashcardSetId}}"
+                  ]
+                },
+                "description": "A generated flashcard set.",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Not found",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/flashcards/{{flashcardSetId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "flashcards",
+                    "{{flashcardSetId}}"
+                  ]
+                },
+                "description": "A generated flashcard set.",
+                "header": []
+              },
+              "code": 404,
+              "status": "Not found",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"not_found\", \"message\": \"That result has expired. Ask the question again.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "POST /api/files/pdf",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/files/pdf",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "files",
+                "pdf"
+              ]
+            },
+            "description": "Upload a PDF (max 10 MB) for quiz generation.",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "notes.pdf"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/files/pdf",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "files",
+                    "pdf"
+                  ]
+                },
+                "description": "Upload a PDF (max 10 MB) for quiz generation.",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "src": "notes.pdf"
+                    }
+                  ]
+                }
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/files/pdf",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "files",
+                    "pdf"
+                  ]
+                },
+                "description": "Upload a PDF (max 10 MB) for quiz generation.",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "src": "notes.pdf"
+                    }
+                  ]
+                }
+              },
+              "code": 400,
+              "status": "Bad request",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"invalid_request\", \"message\": \"Invalid message: Field required\"}}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/files/pdf",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "files",
+                    "pdf"
+                  ]
+                },
+                "description": "Upload a PDF (max 10 MB) for quiz generation.",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "src": "notes.pdf"
+                    }
+                  ]
+                }
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "GET /api/study-plans/{plan_id}",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/study-plans/x",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "study-plans",
+                "x"
+              ]
+            },
+            "description": "A generated exam study plan.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/study-plans/x",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "study-plans",
+                    "x"
+                  ]
+                },
+                "description": "A generated exam study plan.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/study-plans/x",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "study-plans",
+                    "x"
+                  ]
+                },
+                "description": "A generated exam study plan.",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Not found",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/study-plans/x",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "study-plans",
+                    "x"
+                  ]
+                },
+                "description": "A generated exam study plan.",
+                "header": []
+              },
+              "code": 404,
+              "status": "Not found",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"not_found\", \"message\": \"That result has expired. Ask the question again.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "GET /api/question-papers/{paper_id}",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/question-papers/x",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "question-papers",
+                "x"
+              ]
+            },
+            "description": "A generated question paper with CO mapping.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/question-papers/x",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "question-papers",
+                    "x"
+                  ]
+                },
+                "description": "A generated question paper with CO mapping.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/question-papers/x",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "question-papers",
+                    "x"
+                  ]
+                },
+                "description": "A generated question paper with CO mapping.",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Not found",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/question-papers/x",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "question-papers",
+                    "x"
+                  ]
+                },
+                "description": "A generated question paper with CO mapping.",
+                "header": []
+              },
+              "code": 404,
+              "status": "Not found",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"not_found\", \"message\": \"That result has expired. Ask the question again.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "GET /api/reports/{report_id}",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/x",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "reports",
+                "x"
+              ]
+            },
+            "description": "An accreditation report draft with the result ids of its metric tables.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/reports/x",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "reports",
+                    "x"
+                  ]
+                },
+                "description": "An accreditation report draft with the result ids of its metric tables.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/reports/x",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "reports",
+                    "x"
+                  ]
+                },
+                "description": "An accreditation report draft with the result ids of its metric tables.",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            },
+            {
+              "name": "Not found",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/reports/x",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "reports",
+                    "x"
+                  ]
+                },
+                "description": "An accreditation report draft with the result ids of its metric tables.",
+                "header": []
+              },
+              "code": 404,
+              "status": "Not found",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"not_found\", \"message\": \"That result has expired. Ask the question again.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "POST /api/results/rerun",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/results/rerun",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "results",
+                "rerun"
+              ]
+            },
+            "description": "Re-run a pinned dashboard query for the current user (same guard and scope).",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/results/rerun",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "results",
+                    "rerun"
+                  ]
+                },
+                "description": "Re-run a pinned dashboard query for the current user (same guard and scope).",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/results/rerun",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "results",
+                    "rerun"
+                  ]
+                },
+                "description": "Re-run a pinned dashboard query for the current user (same guard and scope).",
+                "header": []
+              },
+              "code": 400,
+              "status": "Bad request",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"invalid_request\", \"message\": \"Invalid message: Field required\"}}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/results/rerun",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "results",
+                    "rerun"
+                  ]
+                },
+                "description": "Re-run a pinned dashboard query for the current user (same guard and scope).",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "POST /api/files/csv",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/files/csv",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "files",
+                "csv"
+              ]
+            },
+            "description": "Upload a CSV (max 5 MB) as a private table for this chat.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/files/csv",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "files",
+                    "csv"
+                  ]
+                },
+                "description": "Upload a CSV (max 5 MB) as a private table for this chat.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            },
+            {
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/files/csv",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "files",
+                    "csv"
+                  ]
+                },
+                "description": "Upload a CSV (max 5 MB) as a private table for this chat.",
+                "header": []
+              },
+              "code": 400,
+              "status": "Bad request",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"invalid_request\", \"message\": \"Invalid message: Field required\"}}"
+            },
+            {
+              "name": "Not logged in",
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/files/csv",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "files",
+                    "csv"
+                  ]
+                },
+                "description": "Upload a CSV (max 5 MB) as a private table for this chat.",
+                "header": []
+              },
+              "code": 401,
+              "status": "Not logged in",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"error\": {\"code\": \"unauthenticated\", \"message\": \"Your session has expired. Please log in again.\"}}"
+            }
+          ]
+        },
+        {
+          "name": "GET /api/health",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "health"
+              ]
+            },
+            "description": "App and database status.",
+            "header": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is 2xx', () => pm.expect(pm.response.code).to.be.within(200, 299));",
+                  "pm.test('returns JSON', () => pm.response.to.be.json);"
+                ]
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/health",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "health"
+                  ]
+                },
+                "description": "App and database status.",
+                "header": []
+              },
+              "code": 200,
+              "status": "OK",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\"ok\": true}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

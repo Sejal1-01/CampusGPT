@@ -1,0 +1,11 @@
+export const MAX_MESSAGE_CHARS = 2000;
+export const MESSAGE_LENGTH_WARNING_CHARS = 1800;
+export const MAX_PDF_BYTES = 10 * 1024 * 1024;
+export const MAX_CSV_BYTES = 5 * 1024 * 1024;
+export const VIRTUALIZE_ROW_THRESHOLD = 100;
+export const TABLE_ROW_HEIGHT_PX = 37;
+export const TABLE_VIEWPORT_HEIGHT_PX = 440;
+export const DEMO_PASSWORD = "demo123";
+export const CHART_SERIES_COUNT = 5;
+export const EMPTY_CELL = "—";
+export const INSTITUTE_NAME = "Indian Institute of Information Technology Bhagalpur";

@@ -1,0 +1,7 @@
+[
+  {"id": "ins-01", "role": "hod_cse", "prompt": "Average attendance by subject in my department"},
+  {"id": "ins-02", "role": "dean", "prompt": "Number of students with overdue fees per department"},
+  {"id": "ins-03", "role": "admin", "prompt": "Unresolved complaints per category"},
+  {"id": "ins-04", "role": "faculty1", "prompt": "Average internal marks in each of my classes"},
+  {"id": "ins-05", "role": "dean", "prompt": "Average SGPA per department in 2025-26"}
+]

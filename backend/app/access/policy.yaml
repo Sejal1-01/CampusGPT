@@ -1,0 +1,43 @@
+roles:
+  student:
+    description: Enrolled student
+    grants:
+      - [academics, self]
+      - [fees, self]
+      - [hostel, self]
+      - [mess, self]
+      - [complaints, self]
+  faculty:
+    description: Teacher
+    grants:
+      - [academics, own_classes]
+      - [teaching_feedback, own_classes]
+  advisor:
+    description: Faculty advisor
+    grants:
+      - [academics, advisees]
+  hod:
+    description: Head of department
+    grants:
+      - [academics, department]
+      - [teaching_feedback, department]
+  dean:
+    description: Dean (academics)
+    grants:
+      - [academics, college]
+      - [teaching_feedback, college]
+      - [fees, college]
+  admin:
+    description: College administration
+    grants:
+      - [academics, college]
+      - [teaching_feedback, college]
+      - [fees, college]
+      - [hostel, college]
+      - [mess, college]
+      - [complaints, college]
+groups:
+  Exam Cell – CSE:
+    description: Exam cell committee for CSE
+    grants:
+      - [academics, department]

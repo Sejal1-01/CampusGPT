@@ -1,0 +1,17 @@
+[
+  {"id": "chart-01", "role": "hod_cse", "prompt": "Subject-wise pass percentage in my department this semester", "expected": ["bar"]},
+  {"id": "chart-02", "role": "dean", "prompt": "Compare pass percentage across all departments", "expected": ["bar", "grouped_bar"]},
+  {"id": "chart-03", "role": "dean", "prompt": "Department-wise pending fees", "expected": ["bar"]},
+  {"id": "chart-04", "role": "admin", "prompt": "Hostel-wise fee defaulters", "expected": ["bar"]},
+  {"id": "chart-05", "role": "admin", "prompt": "Compare average SGPA of hostellers vs day scholars by department", "expected": ["grouped_bar"]},
+  {"id": "chart-06", "role": "dean", "prompt": "Weekly attendance trend of ECE 3rd semester section B", "expected": ["line"]},
+  {"id": "chart-07", "role": "student1", "prompt": "What is my CGPA?", "expected": ["stat"]},
+  {"id": "chart-08", "role": "student1", "prompt": "Share of my fee dues by fee type", "expected": ["pie", "bar"]},
+  {"id": "chart-09", "role": "admin", "prompt": "Share of complaints by category", "expected": ["pie"]},
+  {"id": "chart-10", "role": "student1", "prompt": "My SGPA trend across semesters", "expected": ["line"]},
+  {"id": "chart-11", "role": "faculty1", "prompt": "Theme counts in feedback about my classes", "expected": ["bar", "pie"]},
+  {"id": "chart-12", "role": "hod_cse", "prompt": "Average SGPA by semester for my department's results", "expected": ["line", "bar"]},
+  {"id": "chart-13", "role": "dean", "prompt": "Total pending fees across the college", "expected": ["stat"]},
+  {"id": "chart-14", "role": "admin", "prompt": "Monthly fee collection trend", "expected": ["line"]},
+  {"id": "chart-15", "role": "advisor1", "prompt": "How many of my advisees have a backlog?", "expected": ["stat"]}
+]

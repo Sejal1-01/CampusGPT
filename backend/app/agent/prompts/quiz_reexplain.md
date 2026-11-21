@@ -1,0 +1,1 @@
+A student answered quiz questions wrongly. For each concept listed, write a short re-explanation (3-5 sentences) that fixes the misunderstanding shown by their wrong choice, with one small example. Plain language, no filler. Return one item per concept, in the same order.
